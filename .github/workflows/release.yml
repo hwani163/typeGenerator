@@ -76,7 +76,7 @@ jobs:
         run: tar -czf dist.tar.gz dist/
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v1git
         with:
           tag_name: latest
           name: ${{ steps.release_info.outputs.release_name }}
@@ -126,13 +126,18 @@ jobs:
       - name: Update release branch
         run: |
           git checkout release || git checkout -b release
-          git merge main --no-edit
-
-          # Remove dev files from release branch
-          git rm index.test.ts index.ts tsup.config.ts package-lock.json || true
-
-          if ! git diff --cached --quiet; then
-            git commit -m "Release ${{ needs.build-and-release.outputs.datetime }} - remove dev files"
-          fi
-
+          
+          # 먼저 개발 파일들 삭제 (충돌 방지)
+          git rm -f index.test.ts index.ts tsup.config.ts package-lock.json || true
+          git commit -m "Remove dev files" || true
+          
+          # main 브랜치 변경사항 merge (dist 폴더 등)
+          git merge main --no-edit -X theirs || true
+          
+          # 충돌 발생 시 release 브랜치 버전(파일 삭제)을 유지
+          git checkout release -- index.test.ts index.ts tsup.config.ts package-lock.json || true
+          
+          # 변경사항 커밋 및 푸시
+          git add .
+          git commit -m "Release ${{ needs.build-and-release.outputs.datetime }} - merge main and remove dev files" || true
           git push origin release
