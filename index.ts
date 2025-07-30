@@ -1,7 +1,7 @@
 import { CodeBlockWriter, Project, VariableDeclarationKind } from 'ts-morph';
 import path from 'path';
 
-interface GenerateOptions {
+export interface GenerateOptions {
   inputGlob: string;
   outputFile: string;
   baseDir: string;
@@ -11,7 +11,7 @@ interface GenerateOptions {
   write: (writer: CodeBlockWriter, classes: { className: string, path: string }[]) => void;
 }
 
-export async function generateConfig(options: GenerateOptions) {
+export async function generate(options: GenerateOptions) {
   const { inputGlob, outputFile, baseDir, varName, specificKeyword, write, importType = 'default' } = options;
 
   const project = new Project({
