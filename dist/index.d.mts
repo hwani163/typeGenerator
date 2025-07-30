@@ -12,6 +12,6 @@ interface GenerateOptions {
         path: string;
     }[]) => void;
 }
-declare function generateConfig(options: GenerateOptions): Promise<void>;
+declare function generate(options: GenerateOptions): Promise<void>;
 
-export { generateConfig };
+export { type GenerateOptions, generate };
