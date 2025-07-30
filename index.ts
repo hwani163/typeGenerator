@@ -95,9 +95,14 @@ export async function generate(options: GenerateOptions) {
     // - index 파일 경로 정리: .replace(/\/index$/, '') || '/';
 
     // Import 구문 생성
-    const moduleSpecifier = path.relative(path.dirname(options.outputFile), sourceFile.getFilePath())
+    let moduleSpecifier = path.relative(path.dirname(options.outputFile), sourceFile.getFilePath())
       .replace(/\\/g, '/')
       .replace('.ts', '');
+    
+    // 상대 경로에 ./ 또는 ../ 접두사 추가
+    if (!moduleSpecifier.startsWith('.')) {
+      moduleSpecifier = `./${moduleSpecifier}`;
+    }
 
     const isDefaultExport = routeClass.isDefaultExport();
 
