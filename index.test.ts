@@ -170,7 +170,7 @@ describe('generateConfig', () => {
   test('named export 구문 지원', async () => {
     const { testDir, routesDir, outputDir } = createTestEnv('named-export');
     
-    // named export 파일 생성
+    // named export 파일 생성 good!
     fs.writeFileSync(
       path.join(routesDir, 'named-export.route.ts'),
       'class NamedExportRoute { } export { NamedExportRoute };'
