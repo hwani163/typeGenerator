@@ -6,5 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   splitting: false,
-  sourcemap: true,
+  sourcemap: false, // 배포용에서는 맵 파일 불필요
 })

@@ -150,4 +150,3 @@ async function generateConfig(options) {
 0 && (module.exports = {
   generateConfig
 });
-//# sourceMappingURL=index.js.map
