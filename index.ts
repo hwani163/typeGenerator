@@ -10,7 +10,7 @@ export interface GenerateOptions {
   importType?: 'default' | 'type';
   write: (writer: CodeBlockWriter, classes: { className: string, path: string }[]) => void;
 }
-
+// hehe
 export async function generate(options: GenerateOptions) {
   const { inputGlob, outputFile, baseDir, varName, specificKeyword, write, importType = 'default' } = options;
 
