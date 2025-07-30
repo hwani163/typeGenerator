@@ -1,5 +1,5 @@
 import { describe, test, beforeEach, expect, vi } from 'vitest';
-import { generateConfig } from './index';
+import { generate } from './index';
 import fs from 'fs';
 import path from 'path';
 
@@ -29,7 +29,7 @@ describe('generateConfig', () => {
   test('기본 import 생성', async () => {
     const { testDir, outputDir } = createTestEnv('default-import');
     
-    await generateConfig({
+    await generate({
       inputGlob: path.join(testDir, 'routes/*.route.ts'),
       outputFile: path.join(outputDir, 'routes.ts'),
       baseDir: testDir,
@@ -68,7 +68,7 @@ describe('generateConfig', () => {
   test('type-only import 생성', async () => {
     const { testDir, outputDir } = createTestEnv('type-import');
     
-    await generateConfig({
+    await generate({
       inputGlob: path.join(testDir, 'routes/*.route.ts'),
       outputFile: path.join(outputDir, 'routes.ts'),
       baseDir: testDir,
@@ -94,13 +94,13 @@ describe('generateConfig', () => {
   test('익명 클래스 이름 생성', async () => {
     const { testDir, routesDir, outputDir } = createTestEnv('anonymous-class');
     
-    // 익명 클래스 파일 생성
+    // 익명 클래스 파일 생성  
     fs.writeFileSync(
       path.join(routesDir, 'user-profile.route.ts'),
       'export default class { }'
     );
 
-    await generateConfig({
+    await generate({
       inputGlob: path.join(testDir, 'routes/*.route.ts'),
       outputFile: path.join(outputDir, 'routes.ts'),
       baseDir: testDir,
@@ -137,19 +137,19 @@ describe('generateConfig', () => {
       'export class ExportClassRoute { }'
     );
 
-    await generateConfig({
+    await generate({
       inputGlob: path.join(testDir, 'routes/*.route.ts'),
       outputFile: path.join(outputDir, 'routes.ts'),
       baseDir: testDir,
       varName: 'routes',
       specificKeyword: 'route',
-      write: (writer, classes) => {
+      write: (writer, classes) => { 
         writer.write('{');
         writer.indent(() => {
           classes.forEach(({ className, path }) => {
             writer.writeLine(`${className}: {`);
             writer.indent(() => {
-              writer.writeLine(`class: ${className},`);
+              writer.writeLine(`class: ${className},` );
               writer.writeLine(`path: '${path}',`);
             });
             writer.writeLine(`},`);
@@ -176,7 +176,7 @@ describe('generateConfig', () => {
       'class NamedExportRoute { } export { NamedExportRoute };'
     );
 
-    await generateConfig({
+    await generate({
       inputGlob: path.join(testDir, 'routes/*.route.ts'),
       outputFile: path.join(outputDir, 'routes.ts'),
       baseDir: testDir,
@@ -215,7 +215,7 @@ describe('generateConfig', () => {
       'export class ExportClassTypeRoute { }'
     );
 
-    await generateConfig({
+    await generate({
       inputGlob: path.join(testDir, 'routes/*.route.ts'),
       outputFile: path.join(outputDir, 'routes.ts'),
       baseDir: testDir,
@@ -250,7 +250,7 @@ describe('generateConfig', () => {
 
     const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    await generateConfig({
+    await generate({
       inputGlob: path.join(testDir, 'routes/*.route.ts'),
       outputFile: path.join(outputDir, 'routes.ts'),
       baseDir: testDir,
