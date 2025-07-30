@@ -1,7 +1,7 @@
 // index.ts
 import { Project, VariableDeclarationKind } from "ts-morph";
 import path from "path";
-async function generateConfig(options) {
+async function generate(options) {
   const { inputGlob, outputFile, baseDir, varName, specificKeyword, write, importType = "default" } = options;
   const project = new Project({
     manipulationSettings: {
@@ -113,5 +113,5 @@ async function generateConfig(options) {
   console.log(`\u2705 ${varName} generated at ${outputFile}`);
 }
 export {
-  generateConfig
+  generate
 };

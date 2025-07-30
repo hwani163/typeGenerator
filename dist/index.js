@@ -30,12 +30,12 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // index.ts
 var index_exports = {};
 __export(index_exports, {
-  generateConfig: () => generateConfig
+  generate: () => generate
 });
 module.exports = __toCommonJS(index_exports);
 var import_ts_morph = require("ts-morph");
 var import_path = __toESM(require("path"));
-async function generateConfig(options) {
+async function generate(options) {
   const { inputGlob, outputFile, baseDir, varName, specificKeyword, write, importType = "default" } = options;
   const project = new import_ts_morph.Project({
     manipulationSettings: {
@@ -148,5 +148,5 @@ async function generateConfig(options) {
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  generateConfig
+  generate
 });
