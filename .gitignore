@@ -5,13 +5,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # Build output
-# dist/
 build/
 *.tsbuildinfo
 
 # Test output
 coverage/
-# test-fixtures/
 
 # Environment variables
 .env

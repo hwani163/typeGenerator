@@ -4,12 +4,7 @@
   "description": "Auto generate types and imports from directory exploration",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "test": "vitest run",
-    "test:watch": "vitest"
-  },
+  "scripts": {},
   "keywords": [
     "typescript",
     "generator",
@@ -21,11 +16,5 @@
   "dependencies": {
     "ts-morph": "^20.0.0"
   },
-  "devDependencies": {
-    "@types/node": "^20.0.0",
-    "rimraf": "^5.0.0",
-    "tsup": "^8.5.0",
-    "typescript": "^5.0.0",
-    "vitest": "^1.0.0"
-  }
+  "devDependencies": {}
 }
