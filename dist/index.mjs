@@ -115,4 +115,3 @@ async function generateConfig(options) {
 export {
   generateConfig
 };
-//# sourceMappingURL=index.mjs.map
