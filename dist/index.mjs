@@ -43,7 +43,10 @@ async function generate(options) {
     }
     const relativePath = path.relative(baseDir, sourceFile.getFilePath());
     const fullPath = relativePath.replace(/\\/g, "/").replace(".ts", "");
-    const moduleSpecifier = path.relative(path.dirname(options.outputFile), sourceFile.getFilePath()).replace(/\\/g, "/").replace(".ts", "");
+    let moduleSpecifier = path.relative(path.dirname(options.outputFile), sourceFile.getFilePath()).replace(/\\/g, "/").replace(".ts", "");
+    if (!moduleSpecifier.startsWith(".")) {
+      moduleSpecifier = `./${moduleSpecifier}`;
+    }
     const isDefaultExport = routeClass.isDefaultExport();
     switch (importType) {
       case "type":
