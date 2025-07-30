@@ -56,3 +56,4 @@ temp/
 
 # Claude artifacts
 .claude/
+deploy.sh
