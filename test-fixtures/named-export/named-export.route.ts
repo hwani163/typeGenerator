@@ -1,0 +1,1 @@
+class NamedExportRoute { } export { NamedExportRoute };

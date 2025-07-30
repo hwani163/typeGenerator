@@ -11,7 +11,7 @@ build/
 
 # Test output
 coverage/
-test-fixtures/
+# test-fixtures/
 
 # Environment variables
 .env
